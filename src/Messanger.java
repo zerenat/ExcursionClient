@@ -36,7 +36,7 @@ public class Messanger{
                         //output.println(4+","+cabinNo);
                         break;
                     case 5:
-                        //output.println(5+","+cabinNo+","+excursionId+","+numberOfPeople);
+                         //output.println(5+","+cabinNo+","+excursionId+","+numberOfPeople);
                         break;
                     case 6:
                         //output.println(7+","+email);
