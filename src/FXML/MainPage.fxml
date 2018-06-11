@@ -5,14 +5,12 @@
 <?import javafx.scene.layout.BorderPane?>
 <BorderPane xmlns="http://javafx.com/javafx"
                 xmlns:fx="http://javafx.com/fxml"
-                fx:controller="Main"
-                prefHeight="200" prefWidth="300">
-    <left>
-        <VBox>
-            <VBox spacing="5">
-                <Button fx:id="registerButton" text = "Register" />
-                <Button fx:id="loginButton" text = "Log in" />
-            </VBox>
+                fx:controller="Controller"
+                prefHeight="200" prefWidth="300" >
+    <center>
+        <VBox spacing="5" alignment="CENTER">
+            <Button fx:id="registerButton" text = "Register" onAction="#toRegisterPage" VBox.vgrow="ALWAYS"/>
+            <Button fx:id="loginButton" text = "Log in" onAction="#toLoginPage" VBox.vgrow="ALWAYS"/>
         </VBox>
-    </left>
+    </center>
 </BorderPane>

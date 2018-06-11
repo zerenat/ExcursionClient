@@ -6,9 +6,29 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
+<?import javafx.scene.text.Text?>
+<BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Main"
+            fx:controller="Controller"
             prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+    <center>
+            <GridPane alignment="CENTER">
+                <Text text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <Text text="Email address:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <Text text="Cabin number:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <Text text="Cruise ID:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                <Text text="Password:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                <Text text="Confrim password:  " GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                <TextField fx:id = "registerName" maxWidth="150" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                <TextField fx:id = "registerEmail" maxWidth="150" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                <TextField fx:id = "registerCabinNo" maxWidth="150" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                <TextField fx:id = "registerCruiseId" maxWidth="150" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                <PasswordField fx:id = "registerPassword" maxWidth="150" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                <PasswordField fx:id = "registerConfirmPassword" maxWidth="150" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+                <HBox prefWidth="150" spacing="5" GridPane.rowIndex="6" GridPane.columnIndex="1">
+                    <Button text = "Cancel" alignment="CENTER" onAction="#toMainPage"/>
+                    <Button text = "Confirm" alignment="CENTER" onAction="#processRegisterDetails"/>
+                </HBox>
+            </GridPane>
+    </center>
+</BorderPane>
