@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="UpdateBookingsPageController"
+            prefHeight="400.0" prefWidth="600.0">
+    <BorderPane.margin>
+        <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+    </BorderPane.margin>
+    <left>
+        <ListView fx:id="viewBookings"/>
+    </left>
+    <center>
+        <VBox prefWidth="250" spacing="5">
+            <BorderPane.margin>
+                <Insets bottom="10" left="10" right="10" top="10"/>
+            </BorderPane.margin>
+            <Label fx:id="bookingInfo" />
+            <Label  fx:id="availableSeatsLabel"/>
+            <Button fx:id="changeBookingButton" text="Change booking" onAction="#callChangeBooking" prefWidth="150" VBox.vgrow="ALWAYS" />
+            <Button fx:id="cancelBookingButton" text="Cancel booking" onAction="#callCancelBooking" prefWidth="150" VBox.vgrow="ALWAYS"/>
+            <Button text="Back" onAction="#backToLoggedInPage" prefWidth="150"/>
+        </VBox>
+    </center>
+</BorderPane>
+
+<!--<center>-->
+<!--<ScrollPane>-->
+    <!--<BorderPane.margin>-->
+        <!--<Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />-->
+    <!--</BorderPane.margin>-->
+    <!--<content>-->
+        <!--<TextArea fx:id="chatArea" minWidth="200" maxWidth="450"-->
+                  <!--prefWidth="450" minHeight="200" prefHeight="400"-->
+                  <!--maxHeight="400"/>-->
+    <!--</content>-->
+<!--</ScrollPane>-->
+<!--</center>-->
+<!--<bottom>-->
+<!--<FlowPane>-->
+    <!--<BorderPane.margin>-->
+        <!--<Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />-->
+    <!--</BorderPane.margin>-->
+    <!--<TextField fx:id="inputArea" minWidth="200" maxWidth="450" prefWidth="450"/>-->
+    <!--<Button text="Send" onAction="#sendMessage" minWidth="200" maxWidth="450" prefWidth="450"/>-->
+<!--</FlowPane>-->
+<!--</bottom>-->

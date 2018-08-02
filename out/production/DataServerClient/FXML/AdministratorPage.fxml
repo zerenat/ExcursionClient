@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="AdministratorPageController"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <left>
+        <ListView fx:id = "excursionsList"/>
+    </left>
+    <center>
+        <VBox spacing="5">
+            <BorderPane.margin>
+                <Insets bottom="10" left="10" right="10" top="10"/>
+            </BorderPane.margin>
+            <Label fx:id = "bookedSeats"/>
+            <Button fx:id = "viewExcursionsButton" text = "Excursions" onAction="#loadExcursions" prefWidth="150"/>
+            <Button fx:id = "displayBookingsButton" text = "Display customer bookings" onAction="#displayBookings" prefWidth="150"/>
+            <Button fx:id= "changeBookingButton" text = "Change booking" onAction="#updateBooking" prefWidth="150"/>
+            <Button fx:id = "cancelBookingButton" text = "Cancel Booking" prefWidth="150"/>
+            <Button fx:id = "logOut" text = "Log Out" onAction="#logOut" prefWidth="150"/>
+        </VBox>
+    </center>
+</BorderPane>

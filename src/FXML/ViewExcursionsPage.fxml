@@ -1,19 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.TextField?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Controller"
-            prefHeight="400.0" prefWidth="600.0">
+            fx:controller="ViewExcursionsPageController"
+            prefHeight="200.0" prefWidth="300.0"
+            fx:id = "excursionsBorderPane">
     <left>
-            <ListView fx:id ="excursionList"/>
+        <ListView fx:id = "excursionList" />
     </left>
     <center>
+        <VBox>
+            <BorderPane>
+                <center>
+                    <VBox>
+                        <padding>
+                            <Insets top = "5" left="5" bottom="15"/>
+                        </padding>
 
+                    </VBox>
+                </center>
+                <bottom>
+                    <VBox alignment="CENTER_LEFT" spacing="5">
+                        <padding>
+                            <Insets top = "5" left = "5"/>
+                        </padding>
+                        <Label fx:id="bookingsDisplayArea"/>
+                        <Button fx:id = "bookingButton" text = "Book excursions" onAction="#bookSeats" prefWidth="150"/>
+                        <Button fx:id = "excursionViewBackButton" text = "Back" onAction="#backToLoggedInPage" prefWidth="150"/>
+                    </VBox>
+                </bottom>
+            </BorderPane>
+        </VBox>
     </center>
 </BorderPane>

@@ -5,16 +5,20 @@
 <?import javafx.scene.text.Text?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Controller">
+            fx:controller="LoginPageController">
     <center>
         <GridPane alignment="CENTER">
-            <Text text="Cabin number:  " GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <VBox spacing="15" GridPane.columnIndex="0">
+            <Text text="Email address:  " GridPane.rowIndex="0" GridPane.columnIndex="0"/>
             <Text text="Password:  " GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-            <TextField fx:id = "loginCabinNo" maxWidth="150" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+            </VBox>
+            <VBox spacing="5" GridPane.columnIndex="1">
+            <TextField fx:id = "loginEmail" maxWidth="150" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
             <PasswordField fx:id = "loginPassword" maxWidth="150" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+            </VBox>
             <HBox prefWidth="150" spacing="5" GridPane.rowIndex="4" GridPane.columnIndex="1">
-                <Button text = "Cancel" alignment="CENTER" onAction="#toMainPage"/>
-                <Button fx:id="loginConfirmButton" text = "Log in" alignment="CENTER" onAction="#logIn"/>
+                <Button text = "Cancel" alignment="CENTER" onAction="#backToMainPage" prefWidth="150"/>
+                <Button fx:id="loginConfirmButton" text = "Log in" alignment="CENTER" onAction="#logIn" prefWidth="150"/>
             </HBox>
         </GridPane>
     </center>

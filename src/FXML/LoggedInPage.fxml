@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import javafx.scene.text.Text?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Controller">
+            fx:controller="LoggedInPageController">
+
     <center>
-        <GridPane alignment="CENTER">
-            <Button fx:id="logOutViewExcursions" text="View excursions" GridPane.rowIndex="0" GridPane.columnIndex="0" onAction="#viewExcursions"/>
-            <Button fx:id="logOutManageBookings" text="Manage Bookings" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-            <Button fx:id="logOutLogOut" text="Log out" GridPane.rowIndex="2" GridPane.columnIndex="0" onAction="#logOut"/>
+        <GridPane alignment="CENTER" vgap="5" hgap="5">
+            <Button fx:id="loggedInViewExcursions" text="View excursions" GridPane.rowIndex="0" GridPane.columnIndex="0" onAction="#viewExcursions" prefWidth="150"/>
+            <Button fx:id="loggedInManageBookings" text="Manage Bookings" GridPane.rowIndex="1" GridPane.columnIndex="0" onAction="#updateBookings" prefWidth="150"/>
+            <Button fx:id="loggedInLogOut" text="Log out" GridPane.rowIndex="2" GridPane.columnIndex="0" onAction="#logOut" prefWidth="150"/>
         </GridPane>
     </center>
 </BorderPane>

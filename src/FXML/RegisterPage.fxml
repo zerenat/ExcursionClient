@@ -9,25 +9,31 @@
 <?import javafx.scene.text.Text?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Controller"
+            fx:controller="RegisterPageController"
             prefHeight="400.0" prefWidth="600.0">
+
     <center>
             <GridPane alignment="CENTER">
-                <Text text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-                <Text text="Email address:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-                <Text text="Cabin number:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-                <Text text="Cruise ID:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-                <Text text="Password:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
-                <Text text="Confrim password:  " GridPane.rowIndex="5" GridPane.columnIndex="0"/>
-                <TextField fx:id = "registerName" maxWidth="150" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-                <TextField fx:id = "registerEmail" maxWidth="150" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-                <TextField fx:id = "registerCabinNo" maxWidth="150" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
-                <TextField fx:id = "registerCruiseId" maxWidth="150" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
-                <PasswordField fx:id = "registerPassword" maxWidth="150" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
-                <PasswordField fx:id = "registerConfirmPassword" maxWidth="150" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+                <VBox spacing="15" GridPane.rowIndex="0" GridPane.columnIndex="0">
+                    <Text text="Name:" />
+                    <Text text="Email address:" />
+                    <Text text="Cabin number:" />
+                    <Text text="Cruise ID:" />
+                    <Text text="Password:" />
+                    <Text text="Confrim password:     " />
+                </VBox>
+                <VBox spacing="5" GridPane.rowIndex="0" GridPane.columnIndex="1">
+                    <TextField fx:id = "registerName" maxWidth="150" />
+                    <TextField fx:id = "registerEmail" maxWidth="150" />
+                    <TextField fx:id = "registerCabinNo" maxWidth="150" />
+                    <TextField fx:id = "registerCruiseId" maxWidth="150" />
+                    <PasswordField fx:id = "registerPassword" maxWidth="150" />
+                    <PasswordField fx:id = "registerConfirmPassword" maxWidth="150"/>
+                </VBox>
+
                 <HBox prefWidth="150" spacing="5" GridPane.rowIndex="6" GridPane.columnIndex="1">
-                    <Button text = "Cancel" alignment="CENTER" onAction="#toMainPage"/>
-                    <Button text = "Confirm" alignment="CENTER" onAction="#processRegisterDetails"/>
+                    <Button text = "Cancel" alignment="CENTER" onAction="#backToMainPage" prefWidth="150"/>
+                    <Button text = "Confirm" alignment="CENTER" onAction="#processRegisterDetails" prefWidth="150"/>
                 </HBox>
             </GridPane>
     </center>
