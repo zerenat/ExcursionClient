@@ -36,6 +36,7 @@ public class UpdateBookingsPageController {
         cancelBookingButton.setDisable(true);
         viewBookings.setItems(ExcursionItem.getInstance().getExcursions());
 
+        //Add a listener to ListView
         viewBookings.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ExcursionItem>() {
             @Override
             public void changed(ObservableValue<? extends ExcursionItem> observable, ExcursionItem oldValue, ExcursionItem newValue)throws NullPointerException {
@@ -52,7 +53,6 @@ public class UpdateBookingsPageController {
         this.userEmail = userEmail;
     }
 
-    @FXML
     public void backToLoggedInPage()throws IOException {
         mainWindow = Main.getMainWindow();
         Parent root = FXMLLoader.load(getClass().getResource("FXML/LoggedInPage.fxml"));
@@ -61,7 +61,6 @@ public class UpdateBookingsPageController {
         System.out.println("LoggedIn");
     }
 
-    @FXML
     public void changeBooking(String userEmail, String excursionId, String bookedSeats, String availableSeats, boolean admin)throws IOException {
 
         TextInputDialog dialog = new TextInputDialog();
@@ -104,7 +103,6 @@ public class UpdateBookingsPageController {
         }
     }
 
-    @FXML
     public void callChangeBooking() throws IOException{
         setUserEmail(ClientData.getInstance().getLoggedUser());
         changeBooking(userEmail, viewBookings.getSelectionModel().getSelectedItem().getExcursionId(),

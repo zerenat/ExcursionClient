@@ -25,6 +25,9 @@ public class Messenger {
                 Controller controller = new Controller();
                 ClientData client = ClientData.getInstance();
 
+                Alert alertInfo = new Alert(Alert.AlertType.INFORMATION);
+                Alert alertError = new Alert(Alert.AlertType.ERROR);
+
 
                 switch (splitMessage[0]) {
                     case "1": //Register
@@ -32,23 +35,19 @@ public class Messenger {
                         System.out.println("Sending a message: "+message);
                         String response = input.readLine();
                         if(response.contains("successfully")){
-                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                            alert.setContentText(response);
-                            alert.showAndWait();
+                            alertInfo.setContentText(response);
+                            alertInfo.showAndWait();
                             controller.toMainPage();
                         }else if(response.contains("Email and cabin already registered")){
-                            Alert alert = new Alert(Alert.AlertType.ERROR);
-                            alert.setContentText(response);
-                            alert.showAndWait();
+                            alertError.setContentText(response);
+                            alertError.showAndWait();
                         }else if(response.contains("Entered Cruise ID doesn't exist")){
-                            Alert alert = new Alert(Alert.AlertType.ERROR);
-                            alert.setContentText(response);
-                            alert.showAndWait();
+                            alertError.setContentText(response);
+                            alertError.showAndWait();
                         }
                         else{
-                            Alert alert = new Alert(Alert.AlertType.ERROR);
-                            alert.setContentText("Failed to book the seats. Please try again");
-                            alert.showAndWait();
+                            alertError.setContentText("Failed to book the seats. Please try again");
+                            alertError.showAndWait();
                         }
                         break;
                     case "2": //Log in
@@ -67,14 +66,12 @@ public class Messenger {
                                 LoginPageController.getInstance().toLoggedInPage();
                             }
                         }else if(response.contains("Login failed, user already logged in.")){
-                            Alert alert = new Alert(Alert.AlertType.ERROR);
-                            alert.setContentText(response);
-                            alert.showAndWait();
+                            alertError.setContentText(response);
+                            alertError.showAndWait();
                         }
                         else{
-                            Alert alert = new Alert(Alert.AlertType.ERROR);
-                            alert.setContentText("Invalid cabin number or password.");
-                            alert.showAndWait();
+                            alertError.setContentText("Invalid cabin number or password.");
+                            alertError.showAndWait();
                         }
                         break;
                     case "3": //Log out
@@ -82,6 +79,7 @@ public class Messenger {
                         break;
                     case "4": //Get available excursions
                         output.println(message);
+                        System.out.println(message);
                         response = input.readLine();
                         ExcursionItem.getInstance().storeExcursionItems(response);
                         System.out.println(response);
@@ -91,34 +89,38 @@ public class Messenger {
                         System.out.println("Sending a message: "+message);
                         response = input.readLine();
                         if(response.contains("successful")){
-                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                            alert.setContentText("Booking completed successfully");
-                            alert.showAndWait();
+                            alertInfo.setContentText("Booking completed successfully");
+                            alertInfo.showAndWait();
                             ViewExcursionsPageController.getInstance().updateValues();
                         }else{
-                            Alert alert = new Alert(Alert.AlertType.ERROR);
-                            alert.setContentText("Failed to book the seats. Please try again");
-                            alert.showAndWait();
+                            alertError.setContentText("Failed to book the seats. Please try again");
+                            alertError.showAndWait();
                         }
                         break;
                     case "6": //Get bookings
                         output.println(message);
                         System.out.println("Sending a message: "+message);
                         response = input.readLine();
-                        ExcursionItem.getInstance().storeExcursionItems(response);
+                        if(response.contains("No")){
+                            alertError.setContentText("No customer found.");
+                            alertError.showAndWait();
+                        }else if(response.isEmpty()){
+                            alertError.setContentText("No bookings found.");
+                            alertError.showAndWait();
+                        }else {
+                            ExcursionItem.getInstance().storeExcursionItems(response);
+                        }
                         break;
                     case "7": //Change Booking
                         output.println(message);
                         System.out.println("Sending a message: "+message);
                         response = input.readLine();
                         if(response.contains("successfully")){
-                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                            alert.setContentText("Booking changed successfully");
-                            alert.showAndWait();
+                            alertInfo.setContentText("Booking changed successfully");
+                            alertInfo.showAndWait();
                         }else{
-                            Alert alert = new Alert(Alert.AlertType.ERROR);
-                            alert.setContentText("Failed to change the booking. Please try again");
-                            alert.showAndWait();
+                            alertError.setContentText("Failed to change the booking. Please try again");
+                            alertError.showAndWait();
                         }
                         break;
                     case "8": //Cancel Booking
@@ -126,21 +128,19 @@ public class Messenger {
                         System.out.println("Sending a message: "+message);
                         response = input.readLine();
                         if(response.contains("successfully")){
-                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                            alert.setContentText("Booking canceled successfully");
-                            alert.showAndWait();
+                            alertInfo.setContentText("Booking canceled successfully");
+                            alertInfo.showAndWait();
                         }else{
-                            Alert alert = new Alert(Alert.AlertType.ERROR);
-                            alert.setContentText("Failed to cancel the booking. Please try again");
-                            alert.showAndWait();
+                            alertError.setContentText("Failed to cancel the booking. Please try again");
+                            alertError.showAndWait();
                         }
 
                 }
             }catch (ConnectException e){
                 testBool = false;
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("Unable to establish a connection to the server.");
-                alert.showAndWait();
+                Alert alertError = new Alert(Alert.AlertType.ERROR);
+                alertError.setContentText("Unable to establish a connection to the server.");
+                alertError.showAndWait();
             }
             catch(Exception e){
                 System.out.println("Exception: "+e);

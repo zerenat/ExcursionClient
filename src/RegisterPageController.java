@@ -33,7 +33,7 @@ public class RegisterPageController{
         if (!cruiseId.isEmpty() && !cabinNo.isEmpty() && !email.isEmpty() && !password.isEmpty() && !name.isEmpty() && !confirmPassword.isEmpty()) {
             if(password.equals(confirmPassword)) {
                 String message = "1" + "," + name + "," + email + "," + cabinNo + "," + password + "," + cruiseId;
-                Messenger.getInstance().clientOptions(message);
+                Messenger.getInstance().    clientOptions(message);
             }else{
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setContentText("Password mismatch. Please try again");

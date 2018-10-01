@@ -10,31 +10,33 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Optional;
 
+//Class controlling the activity on Admin page
 public class AdministratorPageController{
     private Stage mainWindow;
     private String userEmail;
     @FXML private ListView <ExcursionItem> excursionsList;
-    @FXML private Button cancelBookingButton;
     @FXML private Button changeBookingButton;
+    @FXML private Button cancelBookingButton;
     @FXML private Label bookedSeats;
 
+    //Admin page controller singleton
     public static AdministratorPageController instance = new AdministratorPageController();
 
+    //Get singleton
     public static AdministratorPageController getInstance(){
         return instance;
     }
 
-    @FXML
     public void initialize(){
-        boolean b = true;
-        //changeBookingButton.setDisable(true);
+        changeBookingButton.setDisable(true);
+        cancelBookingButton.setDisable(true);
         excursionsList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ExcursionItem>() {
             @Override
 
             public void changed(ObservableValue<? extends ExcursionItem> observable, ExcursionItem oldValue, ExcursionItem newValue) {
                 //Optional<String> value = excursionsList.getSelectionModel().getSelectedItem().getBookedSeats().toString();
                 bookedSeats.setText("Seats booked for selected: " + excursionsList.getSelectionModel().getSelectedItem().getBookedSeats());
-                changeBookingButton.setDisable(false);
+                //changeBookingButton.setDisable(false);
             }
         });
     }
@@ -47,38 +49,50 @@ public class AdministratorPageController{
     }
 
     public void loadExcursions() {
+        excursionsList.getItems().clear();
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Excursions");
         dialog.setHeaderText("Enter a specific cruise ID or leave blank");
         Optional<String> result = dialog.showAndWait();
 
         if (result.get().equals("")) {
+            System.out.println("Option1");
             excursionsList.getItems().clear();
-            //ExcursionItem.getInstance().resetExcursionList();
+            ExcursionItem.getInstance().resetExcursionList();
             ClientData.getInstance().setCruiseId("none");
             String message = "4" + "," + ClientData.getInstance().getCruiseId();
             Messenger.getInstance().clientOptions(message);
             excursionsList.setItems(ExcursionItem.getInstance().getExcursions());
-        } else {
+        } else if(!result.get().equals("")) {
+            System.out.println("Option2");
             excursionsList.getItems().clear();
-            //ExcursionItem.getInstance().resetExcursionList();
+            ExcursionItem.getInstance().resetExcursionList();
             ClientData.getInstance().setCruiseId(result.get());
             String message = "4" + "," + ClientData.getInstance().getCruiseId();
             Messenger.getInstance().clientOptions(message);
             excursionsList.setItems(ExcursionItem.getInstance().getExcursions());
+        } else {
+            System.out.println("Canceled");
         }
     }
 
     public void displayBookings(){
+        String message = "";
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Update booking");
         dialog.setHeaderText("Enter customer E-mail address");
         Optional<String> result = dialog.showAndWait();
         if (result.get().isEmpty()){
-            String message = "6"+","+"none";
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("There appears to be no e-mail address inserted. Please add an e-mail address to search for");
+            alert.showAndWait();
+            displayBookings();
+
         }else {
+            //changeBookingButton.setDisable(false);
+            //cancelBookingButton.setDisable(false);
             userEmail = result.get();
-            String message = "6" + "," + result.get();
+            message = "6" + "," + result.get();
             Messenger.getInstance().clientOptions(message);
             excursionsList.setItems(ExcursionItem.getExcursions());
         }
@@ -93,11 +107,6 @@ public class AdministratorPageController{
         bookedSeats.setText("");
         UpdateBookingsPageController.getInstance().updateValues(excursionsList);
     }
-
-    public void resetPage(){
-
-    }
-
 
     public void logOut()throws IOException {
         String message = "3"+","+ClientData.getInstance().getLoggedUser();

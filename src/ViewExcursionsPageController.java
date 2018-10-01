@@ -42,7 +42,7 @@ public class ViewExcursionsPageController extends LoggedInPageController{
                     selectedExcursionsId = excursionList.getSelectionModel().getSelectedItem().getExcursionId();
 
                 } catch (NullPointerException e) {
-
+                    //DEAL WITH ME
                 }
             }
         });
@@ -57,6 +57,7 @@ public class ViewExcursionsPageController extends LoggedInPageController{
         System.out.println("LoggedIn");
     }
 
+    //Book seats dialog. takes request from a user which is then checked and sent to the server if valid
     @FXML
     public void bookSeats() {
         TextInputDialog dialog = new TextInputDialog();
@@ -123,6 +124,8 @@ public class ViewExcursionsPageController extends LoggedInPageController{
 //        });
 //        dialog.showAndWait();
 //    }
+
+    //Refresh information that is displayed
     @FXML
     public void updateValues() {
         try {
