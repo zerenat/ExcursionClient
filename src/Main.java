@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     private static Stage mainWindow;
-    private static Main instance = new Main();
+    //private static Main instance = new Main();
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -21,15 +21,13 @@ public class Main extends Application {
         return mainWindow;
     }
 
-    public static void setMainWindow(Scene scene){
-        mainWindow.setScene(scene);
-    }
-
     @Override
     public void stop() throws Exception {
-        String message = "3"+","+ClientData.getInstance().getLoggedUser();
-        Messenger.getInstance().clientOptions(message);
-        super.stop();
+        if(Messenger.connected) { //Check if connection has been established before sending any info towards server
+            String message = "3" + "," + ClientData.getInstance().getLoggedUser();
+            Messenger.getInstance().clientOptions(message);
+            super.stop();
+        }
     }
 
     public static void main(String[] args) {

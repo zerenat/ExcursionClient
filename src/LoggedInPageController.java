@@ -12,7 +12,7 @@ public class LoggedInPageController {
     @FXML
     public void viewExcursions(){
         try {
-            if(Messenger.testBool == true) {
+            if(Messenger.connected == true) {
                 String message = "4" + "," + ClientData.getInstance().getCruiseId();
                 Messenger.getInstance().clientOptions(message);
                 Parent root = FXMLLoader.load(getClass().getResource("FXML/ViewExcursionsPage.fxml"));

@@ -10,16 +10,18 @@ public class Messenger {
     private static BufferedReader input;
     private static PrintWriter output;
     private static Messenger instance = new Messenger();
-    public static boolean testBool = false;
+    public static boolean connected = false;
 
     public static Messenger getInstance(){
         return instance;
     }
 
     public void clientOptions(String message) {
+
         String [] splitMessage = message.split(",");
-            try(Socket socket = new Socket("localhost", 40450)){
-                testBool = true;
+            try{
+                Socket socket = new Socket("localhost", 40450);
+                connected = true;
                 input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 output = new PrintWriter(socket.getOutputStream(), true);
                 Controller controller = new Controller();
@@ -28,8 +30,9 @@ public class Messenger {
                 Alert alertInfo = new Alert(Alert.AlertType.INFORMATION);
                 Alert alertError = new Alert(Alert.AlertType.ERROR);
 
-
                 switch (splitMessage[0]) {
+                    //Messages (message) are created by other methods in various different classes
+                    //Messenger Class is a distributor for any incoming messages (message)
                     case "1": //Register
                         output.println(message);
                         System.out.println("Sending a message: "+message);
@@ -49,6 +52,7 @@ public class Messenger {
                             alertError.setContentText("Failed to book the seats. Please try again");
                             alertError.showAndWait();
                         }
+
                         break;
                     case "2": //Log in
                         output.println(message);
@@ -56,6 +60,7 @@ public class Messenger {
                         response = input.readLine();
                         System.out.println(response);
                         if(response.contains("successfully")){
+                            connected = true;
                             client.setLoggedUser(splitMessage[1]);
                             System.out.println(splitMessage[1]);
                             if(client.getLoggedUser().equals("sle")){
@@ -73,9 +78,13 @@ public class Messenger {
                             alertError.setContentText("Invalid cabin number or password.");
                             alertError.showAndWait();
                         }
+                        //output.close();
+                        System.out.println(socket.isClosed());
                         break;
                     case "3": //Log out
-                        output.println(message);
+                        if(connected) {
+                            output.println(message);
+                        }
                         break;
                     case "4": //Get available excursions
                         output.println(message);
@@ -83,6 +92,7 @@ public class Messenger {
                         response = input.readLine();
                         ExcursionItem.getInstance().storeExcursionItems(response);
                         System.out.println(response);
+                        socket.close();
                         break;
                     case "5": //Make a booking
                         output.println(message);
@@ -134,17 +144,20 @@ public class Messenger {
                             alertError.setContentText("Failed to cancel the booking. Please try again");
                             alertError.showAndWait();
                         }
-
+                        break;
                 }
-            }catch (ConnectException e){
-                testBool = false;
+            }catch (ConnectException e) {
+                connected = false;
                 Alert alertError = new Alert(Alert.AlertType.ERROR);
                 alertError.setContentText("Unable to establish a connection to the server.");
                 alertError.showAndWait();
-            }
-            catch(Exception e){
+            }catch(Exception e){
                 System.out.println("Exception: "+e);
                 e.printStackTrace();
+
+            }finally {
+                output.flush();
+                output.close();
             }
     }
 }

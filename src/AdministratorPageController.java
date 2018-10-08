@@ -36,7 +36,7 @@ public class AdministratorPageController{
             public void changed(ObservableValue<? extends ExcursionItem> observable, ExcursionItem oldValue, ExcursionItem newValue) {
                 //Optional<String> value = excursionsList.getSelectionModel().getSelectedItem().getBookedSeats().toString();
                 bookedSeats.setText("Seats booked for selected: " + excursionsList.getSelectionModel().getSelectedItem().getBookedSeats());
-                //changeBookingButton.setDisable(false);
+                changeBookingButton.setDisable(false);
             }
         });
     }
